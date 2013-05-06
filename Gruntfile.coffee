@@ -33,12 +33,25 @@ module.exports = (grunt) ->
 				dest: 'build'
 				ext: '.js'
 
+		sass:
+			build:
+				options:
+					trace: true
+					style: 'expanded' # nested (default), compact, compressed, or expanded.
+
+				files:
+					'build/styles/main.css': 'app/styles/test.scss'
+
 		watch:
 			coffee:
 				files: ['app/**/*.coffee']
 				tasks: ['coffee:build']
 				options:
 					nospawn: true
+
+			sass:
+				files: ['app/styles/**/*.scss']
+				tasks: ['sass:build']
 
 		connect:
 			build:
@@ -74,6 +87,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-clean'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
+	grunt.loadNpmTasks 'grunt-contrib-sass'
 	grunt.loadNpmTasks 'grunt-contrib-connect'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-requirejs'
